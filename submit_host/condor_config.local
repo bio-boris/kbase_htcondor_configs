@@ -1,0 +1,29 @@
+##  What machine is your central manager?
+
+CONDOR_HOST = ci-dock
+SCHEDD_HOST = kbase@ci-dock
+
+# Set COLLECTOR_HOST if collector's internal hostname doesn't match DNS name
+# and also set sock=COLLECTOR if using shared port
+# example:
+# COLLECTOR_HOST = ci.kbase.us:9618?sock=collector
+COLLECTOR_HOST = ci.kbase.us?sock=collector
+
+# Set UPDATE_COLLECTOR_WITH_TCP to use TCP instead of UDP for daemon communications
+# UPDATE_COLLECTOR_WITH_TCP = True
+
+
+SEC_DEFAULT_AUTHENTICATION = PASSWORD
+SEC_DEFAULT_AUTHENTICATION_METHODS = PASSWORD
+SEC_DEFAULT_NEGOTIATION = REQUIRED
+
+SEC_PASSWORD_FILE = /etc/condor/password
+
+UID_DOMAIN = ci-dock
+DAEMON_LIST = MASTER, STARTD
+DISCARD_SESSION_KEYRING_ON_STARTUP = False
+
+START = True
+SUSPEND = False
+PREEMPT = False
+KILL = False
