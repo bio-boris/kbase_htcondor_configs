@@ -1,0 +1,56 @@
+##  What machine is your central manager?
+CONDOR_HOST = ci-dock
+SCHEDD_HOST = kbase@ci-dock
+
+# Set COLLECTOR_HOST if collector's internal hostname doesn't match DNS name
+# and also set sock=COLLECTOR if using shared port
+# example:
+# COLLECTOR_HOST = ci.kbase.us:9618?sock=collector
+COLLECTOR_HOST = ci.kbase.us?sock=collector
+
+# If the environment variable USE_TCP is set to true, the template will enable
+# this group of directives that convert communications to TCP
+# per https://lists.cs.wisc.edu/archive/htcondor-users/2011-August/msg00085.shtml
+# UPDATE_COLLECTOR_WITH_TCP = True
+# WANT_UDP_COMMAND_SOCKET = False
+# COLLECTOR_MAX_FILE_DESCRIPTORS = 3000
+UPDATE_COLLECTOR_WITH_TCP = True
+UPDATE_VIEW_COLLECTOR_WITH_TCP = True
+WANT_UDP_COMMAND_SOCKET = False
+COLLECTOR_MAX_FILE_DESCRIPTORS = 3000
+
+SEC_DEFAULT_AUTHENTICATION = PASSWORD
+SEC_DEFAULT_AUTHENTICATION_METHODS = PASSWORD
+SEC_DEFAULT_NEGOTIATION = REQUIRED
+
+SEC_PASSWORD_FILE = /etc/condor/password
+
+UID_DOMAIN = ci-dock
+DAEMON_LIST = MASTER, STARTD
+DISCARD_SESSION_KEYRING_ON_STARTUP = False
+
+START = True
+SUSPEND = False
+PREEMPT = False
+KILL = False
+
+# Machine resource settings
+# NUM_SLOTS = 4
+
+# Dynamic Slots
+NUM_SLOTS = 1
+NUM_SLOTS_TYPE_1 = 1
+SLOT_TYPE_1 = 100%
+SLOT_TYPE_1_PARTITIONABLE = TRUE
+CGROUP_MEMORY_LIMIT_POLICY = soft
+
+
+CLIENTGROUP = "njs"
+
+EXECUTE = /mnt/awe/condor/condor_job_execute/$(HOSTNAME)/
+STARTD_RECOMPUTE_DISK_FREE = true
+
+STARTD_ATTRS = CLIENTGROUP
+
+CCB_ADDRESS = condor
+PRIVATE_NETWORK_NAME = ci-core-condorworker-njs-privileged-partionable-1
